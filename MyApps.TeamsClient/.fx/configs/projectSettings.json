@@ -1,0 +1,55 @@
+{
+    "appName": "MyApps.TeamsClient",
+    "projectId": "f85ac3e6-8c28-4bbf-9614-ff0f54b07b5e",
+    "version": "2.1.0",
+    "components": [
+        {
+            "name": "teams-tab",
+            "hosting": "azure-web-app",
+            "deploy": true,
+            "provision": true,
+            "build": true,
+            "folder": ".",
+            "sso": true
+        },
+        {
+            "name": "azure-web-app",
+            "scenario": "Tab",
+            "provision": true,
+            "connections": [
+                "identity",
+                "aad-app",
+                "teams-tab"
+            ]
+        },
+        {
+            "name": "identity",
+            "provision": true
+        },
+        {
+            "name": "aad-app",
+            "provision": true,
+            "deploy": true
+        }
+    ],
+    "programmingLanguage": "csharp",
+    "solutionSettings": {
+        "name": "fx-solution-azure",
+        "version": "1.0.0",
+        "hostType": "Azure",
+        "azureResources": [],
+        "capabilities": [
+            "Tab",
+            "TabSSO"
+        ],
+        "activeResourcePlugins": [
+            "fx-resource-local-debug",
+            "fx-resource-appstudio",
+            "fx-resource-cicd",
+            "fx-resource-api-connector",
+            "fx-resource-aad-app-for-teams",
+            "fx-resource-frontend-hosting",
+            "fx-resource-identity"
+        ]
+    }
+}

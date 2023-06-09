@@ -1,0 +1,87 @@
+﻿@using Microsoft.Extensions.Configuration
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject MicrosoftTeams MicrosoftTeams
+@inject IWebHostEnvironment HostEnvironment
+@inject IConfiguration Configuration
+@inject NavigationManager MyNavigationManager
+
+@if(isLoading)
+{
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+		<FluentProgressRing/>
+	</div>
+}
+else
+{
+    <div class="welcome page">
+        <div class="narrow page-padding">
+            <img src="hello.png" />
+            <h1 class="center">Welcome@(!String.IsNullOrEmpty(userName) ? ", " + userName : "")!</h1>
+            <p class="center">Your app is running in your @(GetEnvironmentName())</p>
+            <FluentTabs style="width: 90%; justify-content: space-between; margin: 4rem auto; text-align:center;">
+                <FluentTab style="font-size: 14px; min-height: 32px;">My Apps</FluentTab>
+                <FluentTab>Sign-ins</FluentTab>
+                <FluentTab>Onboarding</FluentTab>
+                <FluentTabPanel>
+                    <div style="display:block; width:100%; padding-top:50px;">
+                        @*<EditCode />*@
+@*                        @if (isInTeams)
+                        {
+                            <CurrentUser UserName="@userName" />
+                        }*@
+                        @*<Graph ErrorMessage="@errorMessage"/>*@
+                        <MyAppsToken ErrorMessage="@errorMessage" />
+                    </div>
+                </FluentTabPanel>
+                <FluentTabPanel>
+                    @*<Deploy/>*@
+                    @*<Signins ErrorMessage="@errorMessage" />*@
+                    <Signins UserName="@userName" />
+                </FluentTabPanel>
+                <FluentTabPanel>
+                    @*<Publish/>*@
+                    <Graph ErrorMessage="@errorMessage" />
+                </FluentTabPanel>
+            </FluentTabs>
+        </div>
+    </div>
+}
+
+@code {
+    string userName;
+    string errorMessage;
+    bool isInTeams;
+    bool isLoading = true; 
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if(firstRender)
+        {
+            isInTeams = await MicrosoftTeams.IsInTeams();
+
+            if (isInTeams)
+            { 
+               var user = await teamsUserCredential.GetUserInfoAsync();
+               userName = user.DisplayName;
+            }
+            else
+            {
+                errorMessage = "Not running in Microsoft Teams.";
+            }
+
+            isLoading = false;
+            StateHasChanged();            
+        }
+    }
+
+    private string GetEnvironmentName()
+    {
+        return HostEnvironment.IsDevelopment() ? "local environment" : "Azure environment";
+    }
+}
+

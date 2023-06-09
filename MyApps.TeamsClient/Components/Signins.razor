@@ -1,0 +1,74 @@
+﻿@using System.IO
+@using System.Linq
+@using Azure.Core
+@using Microsoft.Graph
+@inject TeamsFx teamsfx
+
+<div>
+    <h2>Your last Sign Ins</h2>
+    
+    @if (SigninRows != null)
+    {
+        <FluentCard class="card-big">
+        <FluentDataGrid RowsData="@SigninRows" style="margin: 0 0 15px 0;">
+            <PropertyColumn Property="@(x => x.Location)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.OperatingSystem)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.IP)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.App)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.Account)" Sortable="true" />
+        </FluentDataGrid>
+            <FluentAnchor Href="https://mysignins.microsoft.com/" Appearance="Appearance.Accent" Target="_blank">Open Signins</FluentAnchor>
+        </FluentCard>
+    }
+
+
+
+    <p>Sadly this information is fake, but it could should your last signins if this information was available in the graph api with an endpoint that allows getting your personal signin ( something like /v1.0/me/signins). </p>
+
+</div>
+
+@code {
+
+    public record SigninRow(string Location, string OperatingSystem,string IP, string App, string Account);
+    private Random random = new Random();
+
+    [Parameter]
+    public string Username { get; set; }
+
+    private static string[] locations = new[] { "Amsterdam", "Rotterdam", "Eindhoven", "Utrecht" };
+    private static string[] Os = new[] { "Windows 10", "Windows 11", "Android", "iOS" };
+
+    IQueryable<SigninRow>? SigninRows;// = new[] {new SigninRow("Amsterdam", "Windows 10", "", "","") }.AsQueryable();
+
+
+    SigninRow GetSigninItem()
+    {
+        var ip = $"{random.Next(1, 255)}.{random.Next(1, 255)}.{random.Next(1, 255)}.{random.Next(1, 255)}";
+        return new SigninRow(locations[random.Next(locations.Length - 1)], Os[random.Next(Os.Length - 1)], ip, "Office", Username ?? "test@contoso.com");
+    }
+
+    protected override void OnInitialized()
+    {
+        
+        SigninRows = new[] {
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem(),
+                GetSigninItem()
+        }.AsQueryable();
+        base.OnInitialized();
+    }
+
+
+}
