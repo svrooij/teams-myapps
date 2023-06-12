@@ -6,6 +6,8 @@ We had a blast building our application for the [Teams Hacktogether](https://git
 
 This app is by no means ready for production!
 
+[Demo video](https://youtu.be/_v2VvvZYUkw)
+
 ## What this is
 
 - A learning experience in building a Teams app in **Blazor**.
