@@ -1,5 +1,7 @@
 # My apps in Teams
 
+[![Hacktogether badge](https://img.shields.io/badge/HackTogether-Entry-6264A7?style=for-the-badge&logoColor=white&logo=MicrosoftTeams)](https://github.com/microsoft/hack-together-teams)
+
 We had a blast building our application for the [Teams Hacktogether](https://github.com/microsoft/hack-together-teams).
 
 This app is by no means ready for production!
