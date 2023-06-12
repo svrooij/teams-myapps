@@ -25,6 +25,7 @@ else
                 <FluentTab style="font-size: 14px; min-height: 32px;">My Apps</FluentTab>
                 <FluentTab>Sign-ins</FluentTab>
                 <FluentTab>Onboarding</FluentTab>
+                <FluentTab>Coding Stephan</FluentTab>
                 <FluentTabPanel>
                     <div style="display:block; width:100%; padding-top:50px;">
                         @*<EditCode />*@
@@ -42,8 +43,10 @@ else
                     <Signins UserName="@userName" />
                 </FluentTabPanel>
                 <FluentTabPanel>
-                    @*<Publish/>*@
                     <Graph ErrorMessage="@errorMessage" />
+                </FluentTabPanel>
+                <FluentTabPanel>
+                    <Blog />
                 </FluentTabPanel>
             </FluentTabs>
         </div>

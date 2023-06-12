@@ -88,7 +88,7 @@ code {
     position:relative;
 }
 
-.grid-card > a {
+.grid-card > a, .blog-card > a {
     position: absolute;
     top:0;
     left:0;
@@ -104,4 +104,10 @@ code {
 
 .card-big {
     padding:40px 20px;
+}
+
+.blog-card {
+    padding: 10px 15px;
+    position: relative;
+    margin: 0 0 30px 0;
 }
