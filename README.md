@@ -21,7 +21,7 @@ This app is by no means ready for production!
 
 - A app you should use in production.
 - A fully supported Teams app (but you can always contact one of us if you want something similar for your company)
-- A winner in the hackathon.
+- A winner in the hackathon ([yet](https://github.com/microsoft/hack-together-teams/issues/66)).
 
 ## Features
 
@@ -53,6 +53,10 @@ Once we got the hang of it we decided that we might also add some blog to the mi
 
 ## Journey
 
-We are planning a blog series on the topic.
+Follow along our journey while building this app.
 
 - [Teams Hacktogether Idea](https://svrooij.io/2023/06/12/teams-hacktogether-idea/)
+- [Teams Hacktogether Getting access](https://svrooij.io/2023/06/12/teams-hacktogether-getting-access/)
+- [Teams Hacktogether Toolkit](https://svrooij.io/2023/06/13/teams-hacktogether-toolkit/)
+- [Teams Hacktogether Blazor](https://svrooij.io/2023/06/14/teams-hacktogether-blazor/)
+- [Teams Hacktogether Entry](https://svrooij.io/2023/06/22/teams-hacktogether-entry/)
